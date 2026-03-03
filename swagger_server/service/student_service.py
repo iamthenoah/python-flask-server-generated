@@ -17,11 +17,11 @@ def add(student=None):
     query = reduce(lambda a, b: a & b, queries)
     res = student_db.search(query)
     if res:
-        return 'already exists', 409
+        return ('already exists', 409)
 
     doc_id = student_db.insert(student.to_dict())
     student.student_id = doc_id
-    return student.student_id
+    return doc_id
 
 
 def get_all():
@@ -34,7 +34,7 @@ def get_all():
 def get_by_id(student_id=None, subject=None):
     student = student_db.get(doc_id=int(student_id))
     if not student:
-        return 'not found', 404
+        return None
     student['student_id'] = student_id
     print(student)
     return student
@@ -43,6 +43,6 @@ def get_by_id(student_id=None, subject=None):
 def delete(student_id=None):
     student = student_db.get(doc_id=int(student_id))
     if not student:
-        return 'not found', 404
+        return False
     student_db.remove(doc_ids=[int(student_id)])
-    return student_id
+    return True

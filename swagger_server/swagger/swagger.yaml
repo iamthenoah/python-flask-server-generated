@@ -4,10 +4,8 @@ info:
   description: A simple API to manage students and their grades
   version: 1.0.0
 servers:
-- url: https://virtserver.swaggerhub.com/idk-d08/devops/1.0.0
+- url: https://virtserver.swaggerhub.com/tutorial/1.0.0
   description: SwaggerHub API Auto Mocking
-- url: http://localhost:8080/tutorial/1.0.0
-  description: Local development server
 paths:
   /student:
     get:
