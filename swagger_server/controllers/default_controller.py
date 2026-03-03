@@ -17,7 +17,7 @@ def add_student(body=None):  # noqa: E501
     if connexion.request.is_json:
         body = Student.from_dict(connexion.request.get_json())  # noqa: E501
         student_id = add(body)
-        return student_id, 201
+        return student_id, 200
 
     return 'Invalid input', 400
 
