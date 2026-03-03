@@ -24,6 +24,13 @@ def add(student=None):
     return student.student_id
 
 
+def get_all():
+    all_students = student_db.all()
+    for idx, student in enumerate(all_students, start=1):
+        student['student_id'] = idx
+    return all_students
+
+
 def get_by_id(student_id=None, subject=None):
     student = student_db.get(doc_id=int(student_id))
     if not student:
