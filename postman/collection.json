@@ -1555,6 +1555,102 @@
               "body": "\"<string>\""
             }
           ]
+        },
+        {
+          "name": "3.Get student average grade",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "tests[\"Status code is 200\"] = responseCode.code === 200;",
+                  "var jsonData = parseFloat(responseBody);",
+                  "tests[\"Average grade is a number\"] = !isNaN(jsonData);",
+                  "tests[\"Average grade is between 0 and 10\"] = jsonData >= 0 && jsonData <= 10;"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/student/{{student_id}}/average_grade",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "student",
+                "{{student_id}}",
+                "average_grade"
+              ]
+            },
+            "description": "Get the average grade of a student"
+          },
+          "response": [
+            {
+              "name": "successful operation",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/student/1/average_grade",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "student",
+                    "1",
+                    "average_grade"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "body": "7.5"
+            },
+            {
+              "name": "student not found or has no grades",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/student/999/average_grade",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "student",
+                    "999",
+                    "average_grade"
+                  ]
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "_postman_previewlanguage": "text",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "cookie": [],
+              "body": ""
+            }
+          ]
         }
       ]
     }

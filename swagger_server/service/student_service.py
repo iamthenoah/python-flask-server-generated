@@ -46,3 +46,21 @@ def delete(student_id=None):
         return False
     student_db.remove(doc_ids=[int(student_id)])
     return True
+
+
+def get_average_grade(student_id=None):
+    """Calculate the average grade for a student.
+    
+    Returns the average grade or None if student not found or has no grades.
+    """
+    student = student_db.get(doc_id=int(student_id))
+    if not student:
+        return None
+    
+    grade_records = student.get('grade_records', [])
+    if not grade_records:
+        return None
+    
+    total = sum(record['grade'] for record in grade_records)
+    average = total / len(grade_records)
+    return round(average, 2)
