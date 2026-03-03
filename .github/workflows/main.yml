@@ -12,10 +12,10 @@ jobs:
     - uses: actions/checkout@v2
     - name: Build docker
       run: |
-        docker build . -t python-flask-server-generated/student_service
+        docker build . -t greffnoah/student_service
     - name: run docker
       run: |
-        docker run -d -p 8080:8080 python-flask-server-generated/student_service:latest && \
+        docker run -d -p 8080:8080 greffnoah/student_service:latest && \
           docker ps && sleep 5
 
     - name: "Check files existence"
@@ -59,4 +59,4 @@ jobs:
 
     - name: Push image to docker hub Container Registry
       run: | 
-          docker push python-flask-server-generated/student_service
+          docker push greffnoah/student_service
